@@ -15,7 +15,11 @@ export default function Home() {
   return (
     <div className="m-6">
       <h1>Welcom to my app</h1>
+
+      <div className="my-6 flex flex-col max-w-sm gap-4">
       <MyButton />
+      <MyButton />
+      </div>
 
       <ul className="list-disc list-inside mt-6">
         {listItems}

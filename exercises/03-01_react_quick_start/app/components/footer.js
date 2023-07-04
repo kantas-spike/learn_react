@@ -1,6 +1,6 @@
 'use client'
 
-import Link from "next/link"
+import MyLink from "@/components/link"
 import { usePathname } from "next/navigation"
 
 export default function MyFooter() {
@@ -12,7 +12,7 @@ export default function MyFooter() {
     } else {
         content = <div>
             <hr className='my-4'/>
-            <Link href="/" className="underline underline-offset-4 text-blue-400">Homeへ戻る</Link>
+            <MyLink href="/">Homeへ戻る</MyLink>
         </div>
     }
 

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import MyButton from "@/components/button"
-import Link from "next/link"
+import MyLink from "@/components/link"
 
 const pages = [
   { title: 'About', path: '/about' },
@@ -18,7 +18,7 @@ export default function Home() {
   }
 
   const listItems = pages.map( (page, idx) => <li key={idx}>
-    <Link className="underline underline-offset-4 text-blue-400" href={page.path}>{page.title}</Link>
+    <MyLink href={page.path}>{page.title}</MyLink>
   </li>)
 
   return (

@@ -91,6 +91,8 @@ https://nextjs.org/telemetry
 
 開発用サーバーが起動します。`http://localhost:3000`にブラウザでアクセスするとページが表示されます。
 
+### ページの表示
+
 `app/page.js`を変更するとページ内容を変更できます。
 
 では試しに、`app/page.js`を以下に変更します。
@@ -103,8 +105,64 @@ export default function Home() {
 }
 ~~~
 
-ブラウザの表示も変更れますね。
+ブラウザの表示も変更されますね。
 
-以上で、開発環境を作成できました。
+### ルーティング
+
+`Next.js`には2種類のルーティング方法があるようです。
+
+- [App Router](https://nextjs.org/docs/app/building-your-application/routing)
+- [Pages Router](https://nextjs.org/docs/pages/building-your-application/routing)
+
+`create-next-app` でプロジェクト作成時に、 `✔ Would you like to use App Router? (recommended)` を`YES`に設定したので、本プロジェクトでは `App Router` を利用します。 [^2]
+
+既に作成済みの`app/page.js`は、アプリケーションのルートページになります。
+現在、アプリケーションが`http://localhost:3000`となっているので、ルートページのURLは`http://localhost:3000`になります。
+
+`http://localhost:3000/test01`という新たなページを追加する場合は、`app/test01/page.js`というファイルを作成し、以下を記載します。
+
+~~~jsx
+export default function Test01() {
+  return (
+    <div class="mt-8 mx-4 text-6xl">1つめのテストページです。</div>
+  )
+}
+~~~
+
+`http://localhost:3000/test01`にブラウザでアクセスすると、該当ページが表示されます。
+
+### リンク
+
+ページ間を行き来する方法は2つあるようです。
+
+- [<Link>Component](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#link-component)を使う
+- [useRouter() Hook](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#userouter-hook)を使う
+
+Reactの学習からはじめたいので、まずは、`<Link>`を使用したいと思います。 [^3]
+
+では、`app/page.js`に、`app/test01/page.js`へのリンクを追加します。
+
+`app/pages.js`を以下のように変更してください。
+
+~~~jsx
+import Link from 'next/link'
+
+export default function Home() {
+  return (
+  <div>
+    <div class="mt-8 mx-4 text-6xl">はじめてのNext.js</div>
+    <div class="my-6 mx-8">
+      <ul>
+        <li><Link href="/test01" className="underline underline-offset-4 text-blue-500">Test01を表示します</Link></li>
+      </ul>
+    </div>
+  </div>
+  )
+}
+~~~
+
+ブラウザに表示されるリンクをクリックすると`http://localhost:3000/test01`を表示できます。
 
 [^1]: 私は`TypeScript`がわからないので`No`にしています。
+[^2]: `App Router` は `Next.js v13`から導入された新しいRouting方法のようです。今後はこちらが推奨されるようです。
+[^3]: `useRouter()`については`Next.js`の学習の中で学んでいく予定です。

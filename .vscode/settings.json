@@ -1,0 +1,8 @@
+{
+    "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+    "eslint.workingDirectories": [
+        "./exercises/02_devenv-validation",
+        "./exercises/03-01_react_quick_start",
+    ],
+    "js/ts.implicitProjectConfig.checkJs": true,
+}

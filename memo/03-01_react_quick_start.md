@@ -2,9 +2,9 @@
 
 [Quick Start – React](https://react.dev/learn)に沿ってReactを学んでいきます。
 
-学んだ内容は、このメモに記載し、[03-01_react_quick_start](../exercises/03-01_react_quick_start)プロジェクトに、コードを記載します。
+学んだ内容は本メモに記載し、コードは[03-01_react_quick_start](../exercises/03-01_react_quick_start)プロジェクトに記載します。
 
-## 03-01_react_quick_startの作成
+## 環境構築
 
 今回はオプションを明示的に指定してプロジェクトを作成しています。
 
@@ -26,7 +26,7 @@ npm run dev
 
 `create-next-app`実行時の`--import-alias`オプションの指定方法を間違っていました。
 
-以下のように、`--import-alias`を引数なしで指定していたため、`--use--npm`がエイリアスとして登録されてしまいました。
+以下のように、`--import-alias`を引数なしで指定していたため、`--use-npm`がエイリアスとして登録されてしまいました。
 
 ~~~shell
 npx create-next-app@latest exercises/03-01_react_quick_start --js --eslint --tailwind --app --import-alias "" --use-npm --no-src-dir
@@ -73,9 +73,8 @@ function Sample() {
 
 部品がいつも`<div/>`で囲わることが嫌な場合は、`<></>`で囲うことで、ルート要素なしの部品を返却できます。
 
-`app/about/pages.js`がその例です。
-
 ~~~jsx
+// app/about/pages.js
 export default function AboutPage() {
     return (
         <>
@@ -144,10 +143,10 @@ const listItems = pages.map( (page, idx) => <li key={idx}>{page.title}</li>)
 
 `onClick`などのイベントハンドラや`useState`などのフックを利用する部品(関数)は、`"use client"`ディレクティブを宣言しないとエラーになります。[^10]
 
-`"use client"`ディレクティブのついた部品はブラウザ上で基本的にレンダリングされます。(Next.jsでは、初期表示時に性能向上のために、サーバー上で事前レンダリングした結果をブラウザに表示します)
+`"use client"`ディレクティブのついた部品はブラウザ上でレンダリングされます。(例外として、Next.jsでは初期表示時に性能向上のために、サーバー上で事前レンダリングした結果をブラウザに表示します)
 これをクライアントコンポーネントと呼びます。
 
-一方、`"use client"`ディレクティブのついていない部品は、サーバー専用となります。これをサーバーコンポーネントと呼びます。
+一方、`"use client"`ディレクティブのついていない部品は、サーバー内専用となりブラウザ上ではレンダリングされません。これをサーバーコンポーネントと呼びます。
 
 部品をクライアントコンポーネントにするか、サーバーコンポーネントにするかの判断は、用途や利用する機能、セキュリティなどの観点で判断するようです。 [^11]
 
@@ -224,8 +223,8 @@ export default function MyButton({count, onClick}) {
 }
 ~~~
 
-また、JavaScriptの`function MyButton({count, onClick})`という引数の取得方法は、
-分割代入を使った関数の引数として渡されたオブジェクトからのプロパティの展開という方法になります。[^12]
+また、JavaScriptの`function MyButton({count, onClick})`という引数の取得方法は、分割代入を利用しています。
+関数の引数として渡されたオブジェクトを分割代入により変数に展開しています。[^12]
 
 ### 各ページで共通の表示する場合、`app/layout.js`で定義する (78d408db98282bbc0e6429c0512c298644938fab)
 
@@ -256,7 +255,7 @@ export default function RootLayout({ children }) {
 
 ### 表示中のページのパスを取得するためには`usePathname()`を使用する (78d408db98282bbc0e6429c0512c298644938fab)
 
-表示中のページによってフッタの表示内容を変更した場合、`usePathname()`を使ってページのパスを取得し条件判定します。
+表示中のページによってフッタの表示内容を変更した場合、`usePathname()`を使ってページのパスを取得し判定します。 [^21]
 
 ~~~jsx
 // components/footer.js
@@ -299,7 +298,7 @@ return <li className="item">{name}</li>;
 
 ### Linkをラップした専用部品を作成する場合、`分割代入`を利用して関数の引数から必要な属性と残りの属性を取得すると便利 (0c64645889631ce0ecd3cecbf264bcb7f3e75073)
 
-Next.js標準の`Link`をラップした`MyLink`を作る場合、カスタマイズしたい属性のみ、`分割代入`で関数の引数で取得し、関数内で`<Link/>`に属性を渡してやれば良いようだ。
+Next.js標準の`Link`をラップした`MyLink`を作る場合、カスタマイズしたい属性のみ、`分割代入`で関数の引数で取得し、関数内で`<Link/>`に属性を渡してやればいいようです。
 
 ~~~jsx
 // `components/link.js`
@@ -310,7 +309,7 @@ export default function MyLink({ children, className, ...others}) {
 }
 ~~~
 
-関数では`function MyLink({ children, className, ...others})`のように、必要な属性名(`children`,`className`)を明示的に取得し、
+関数では`function MyLink({ children, className, ...others})`のように、`分割代入`により必要な属性名(`children`,`className`)を明示的に取得し、
 残りの属性は`...others`として、残った属性をオブジェクトして格納させます。 [^15]
 
 `<Link/>`どのような属性が指定されるか不明なので`...others`として纏めることができるので便利です。
@@ -348,11 +347,12 @@ function Card({ children }) {
 
 ### サブプロジェクトもeslintできるようにvscodeを設定 (528e7fffdd2a64baa118bce4338703cb1be2be68)
 
-`exercises`内に複数プロジェクトがある場合、`eslint.workingDirectories`に対象プロジェクトを追加すると良いようです。 [^18]
+本プロジェクトは`exercises`内に複数プロジェクトがあります。
+このような複数のサブプロジェクトがある場合、`eslint.workingDirectories`に対象プロジェクトを追加すると良いようです。 [^18]
 
 ### Push前の過去のコミットメッセージを修正する
 
-コミットとIssueの関連付け忘れていました。 [^20]
+いろいろコミットした後で、コミットとIssueの関連付け忘れていることに気付きました。 [^20]
 
 既に複数のコミットがあり、あとからコミットメッセージを変更して、キーワード`fix: #xxx`を追加したい場合、
 インタラクティブなリベース(`git rebase -i HEAD~n`)を利用するといいようです。 [^19]
@@ -377,3 +377,4 @@ function Card({ children }) {
 [^18]: [サブディレクトリにプロジェクトがあるときにVSCodeのESLintを有効にする](https://zukucode.com/2020/10/eslint-vscode-subdirectory.html)
 [^19]: [コミットメッセージの変更 - 古いまたは複数のコミットメッセージの修正 | GitHub Docs](https://docs.github.com/ja/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/changing-a-commit-message#amending-older-or-multiple-commit-messages)
 [^20]: [Pull RequestをIssueにリンクする - GitHub Docs](https://docs.github.com/ja/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword)
+[^21]: [Functions: usePathname | Next.js](https://nextjs.org/docs/app/api-reference/functions/use-pathname)

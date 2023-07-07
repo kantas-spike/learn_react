@@ -1,3 +1,3 @@
-export default function Square() {
-    return <button className="border w-8 h-8">X</button>
+export default function Square({value}) {
+    return <button className="border w-8 h-8">{value}</button>
 }

@@ -1,13 +1,9 @@
 'use client'
 
-import { useState } from "react"
 import Square from "./square"
 import { calculateWinner } from "@/lib/game_logic"
 
-export default function Board() {
-    const [xIsNext, setXIsNext] = useState(true)
-    const [squares, setSquares] = useState(Array(9).fill(null))
-
+export default function Board({ xIsNext, squares, onPlay}) {
     function handleClick(i) {
         if (squares[i] || calculateWinner(squares)) {
             return
@@ -18,8 +14,7 @@ export default function Board() {
         } else {
             nextSquares[i] = "O"
         }
-        setSquares(nextSquares)
-        setXIsNext(!xIsNext)
+        onPlay(nextSquares)
     }
 
     const winner = calculateWinner(squares)
@@ -33,7 +28,7 @@ export default function Board() {
     }
 
     return (
-        <>
+        <div className="h-screen flex flex-col justify-center items-center">
             <div className="text-sm mb-4">{status}</div>
             <div className="flex flex-col">
                 <div className="flex">
@@ -52,6 +47,6 @@ export default function Board() {
                     <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
                 </div>
             </div>
-        </>
+        </div>
     )
 }

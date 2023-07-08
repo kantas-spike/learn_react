@@ -22,14 +22,14 @@ npm run dev
 
 ## 学んだこと
 
-### aliasの設定 (f90739c4e07a686b32fdbe26750614af4a58e0a8)
+### aliasの設定 ([f90739c](/kantas-spike/learn_react/commit/f90739c4e07a686b32fdbe26750614af4a58e0a8))
 
 `create-next-app`実行時の`--import-alias`オプションの指定方法を間違っていました。
 
 以下のように、`--import-alias`を引数なしで指定していたため、`--use-npm`がエイリアスとして登録されてしまいました。
 
 ~~~shell
-npx create-next-app@latest exercises/03-01_react_quick_start --js --eslint --tailwind --app --import-alias "" --use-npm --no-src-dir
+npx create-next-app@latest exercises/03-01_react_quick_start --js --eslint --tailwind --app --import-alias --use-npm --no-src-dir
 ~~~
 
 `--import-alias`オプション未指定時は、`--import-alias "@/*"`と同じ意味になります。 [^1]
@@ -49,7 +49,7 @@ npx create-next-app@latest exercises/03-01_react_quick_start --js --eslint --tai
 
 ただし、今思うと`components`に限定する必要があったのか疑問です。デフォルトの`"@/*"`ままで良かったように思います。
 
-### `</>`も利用可能 (b921f3d83b103ee552ca6fbccae942773d471fc3)
+### `</>`も利用可能 ([b921f3d](/kantas-spike/learn_react/commit/b921f3d83b103ee552ca6fbccae942773d471fc3))
 
 JSXを利用する関数が返却できるのは1つのルート要素のみです。 [^2]
 
@@ -88,7 +88,7 @@ export default function AboutPage() {
 `npm run dev`で実行して、`http://localhost:3000/about`を表示し、ブラウザの開発ツールのインスペクタで確認してみましょう。
 ルート要素なしで、`<h1/><p/>`が表示されます。
 
-### style属性にオブジェクトを指定できる (1236d66353ffce879d78b8b055c194ec1166ae41)
+### style属性にオブジェクトを指定できる ([1236d66](/kantas-spike/learn_react/commit/1236d66353ffce879d78b8b055c194ec1166ae41))
 
 JSXでstyle属性を設定する場合は、スタイル情報を定義したオブジェクトを指定します。 [^3]
 
@@ -109,13 +109,13 @@ JSXでstyle属性を設定する場合は、スタイル情報を定義したオ
 // ...略..
 ~~~
 
-### JSX内ではif文は使えない (2f58fd926d6beebb0353434d0aaa4cb95ebaaf40)
+### JSX内ではif文は使えない ([2f58fd9](/kantas-spike/learn_react/commit/2f58fd926d6beebb0353434d0aaa4cb95ebaaf40))
 
 JSXの`{}`(Curly Braces)内にはJavaScriptの式を実行できますが、if文のような**文**を実行できません。
 
 そのため、JSXの外側でJavaScriptでif文を利用するか、JSX内で、論理積や条件 (三項) 演算子を使って式として条件判定を行う必要があります。 [^6] [^7]
 
-### 繰り返されるリスト項目には`key`が必要 (44368883277725d2921d6dff9c3fd198f5106ab5)
+### 繰り返されるリスト項目には`key`が必要 ([4436888](/kantas-spike/learn_react/commit/44368883277725d2921d6dff9c3fd198f5106ab5))
 
 リスト内に表示する各`<li/>`に`key`がないと、以下の警告が表示されます。 [^8]
 
@@ -130,7 +130,7 @@ Reactでは、リストの各要素には`key`属性にユニークなIDを設�
 <li key={product.id}>{product.name}</li>
 ~~~
 
-### データに`key`となる情報がないため`map()`関数でindexを取得する (bc7f1b7832296e8ec17ab4991a6eb6cba184ca70)
+### データに`key`となる情報がないため`map()`関数でindexを取得する ([bc7f1b7](/kantas-spike/learn_react/commit/bc7f1b7832296e8ec17ab4991a6eb6cba184ca70))
 
 データにユニークIDが存在しない場合は、`map()`関数のインデックスを使用しました。 [^9]
 
@@ -139,7 +139,7 @@ Reactでは、リストの各要素には`key`属性にユニークなIDを設�
 const listItems = pages.map( (page, idx) => <li key={idx}>{page.title}</li>)
 ~~~
 
-### html要素のイベントハンドラを利用する場合や、ReactのHookを利用する場合、Next.jsでは'use client'を宣言する必要がある (7b074c69c755b1ec5913bf012c5265710e5de1a0)
+### html要素のイベントハンドラを利用する場合や、ReactのHookを利用する場合、Next.jsでは'use client'を宣言する必要がある ([7b074c6](/kantas-spike/learn_react/commit/7b074c69c755b1ec5913bf012c5265710e5de1a0))
 
 `onClick`などのイベントハンドラや`useState`などのフックを利用する部品(関数)は、`"use client"`ディレクティブを宣言しないとエラーになります。[^10]
 
@@ -150,7 +150,7 @@ const listItems = pages.map( (page, idx) => <li key={idx}>{page.title}</li>)
 
 部品をクライアントコンポーネントにするか、サーバーコンポーネントにするかの判断は、用途や利用する機能、セキュリティなどの観点で判断するようです。 [^11]
 
-### Reactで部品に状態を持たせる場合、部品で`useState` を呼び出し使用する (ea7f12eead277e4d185748f8f172a5ac9efd3891)
+### Reactで部品に状態を持たせる場合、部品で`useState` を呼び出し使用する ([ea7f12e](/kantas-spike/learn_react/commit/ea7f12eead277e4d185748f8f172a5ac9efd3891))
 
 `useState`を使うと部品内で状態を管理できます。
 
@@ -182,7 +182,7 @@ function MyButton() {
 }
 ~~~
 
-### ページで1つの状態を持たせる場合、ページで`useState` を呼び出し、部品に属性(引数)として引き渡す (67c1b4e92f76952be75c8b0177179db6346abdf9)
+### ページで1つの状態を持たせる場合、ページで`useState` を呼び出し、部品に属性(引数)として引き渡す ([67c1b4e](/kantas-spike/learn_react/commit/67c1b4e92f76952be75c8b0177179db6346abdf9))
 
 ページに状態を持たせて、部品に`現在の状態`と`状態変更関数`を属性として渡すことで、各部品で状態を共有できます。
 
@@ -226,7 +226,7 @@ export default function MyButton({count, onClick}) {
 また、JavaScriptの`function MyButton({count, onClick})`という引数の取得方法は、分割代入を利用しています。
 関数の引数として渡されたオブジェクトを分割代入により変数に展開しています。[^12]
 
-### 各ページで共通の表示する場合、`app/layout.js`で定義する (78d408db98282bbc0e6429c0512c298644938fab)
+### 各ページで共通の表示する場合、`app/layout.js`で定義する ([78d408d](/kantas-spike/learn_react/commit/78d408db98282bbc0e6429c0512c298644938fab))
 
 ページで共通のレイアウトは`app/layout.js`で定義できます。 [^13]
 
@@ -253,7 +253,7 @@ export default function RootLayout({ children }) {
 }
 ~~~
 
-### 表示中のページのパスを取得するためには`usePathname()`を使用する (78d408db98282bbc0e6429c0512c298644938fab)
+### 表示中のページのパスを取得するためには`usePathname()`を使用する ([78d408d](/kantas-spike/learn_react/commit/78d408db98282bbc0e6429c0512c298644938fab))
 
 表示中のページによってフッタの表示内容を変更した場合、`usePathname()`を使ってページのパスを取得し判定します。 [^21]
 
@@ -285,7 +285,7 @@ export default function MyFooter() {
 }
 ~~~
 
-### 部品が`return null`すると、該当部品は表示されない (78d408db98282bbc0e6429c0512c298644938fab)
+### 部品が`return null`すると、該当部品は表示されない ([78d408d](/kantas-spike/learn_react/commit/78d408db98282bbc0e6429c0512c298644938fab))
 
 条件により、部品を表示したくない場合は`null`を返すといいようです。 [^14]
 
@@ -296,7 +296,7 @@ if (isPacked) {
 return <li className="item">{name}</li>;
 ~~~
 
-### Linkをラップした専用部品を作成する場合、`分割代入`を利用して関数の引数から必要な属性と残りの属性を取得すると便利 (0c64645889631ce0ecd3cecbf264bcb7f3e75073)
+### Linkをラップした専用部品を作成する場合、`分割代入`を利用して関数の引数から必要な属性と残りの属性を取得すると便利 ([0c64645](/kantas-spike/learn_react/commit/0c64645889631ce0ecd3cecbf264bcb7f3e75073))
 
 Next.js標準の`Link`をラップした`MyLink`を作る場合、カスタマイズしたい属性のみ、`分割代入`で関数の引数で取得し、関数内で`<Link/>`に属性を渡してやればいいようです。
 
@@ -323,7 +323,7 @@ export default function MyLink({ children, className, ...others}) {
 関数の引数で取得するときの`分割代入の残余のプロパティー`と、
 `<Link/>`の属性として展開するときの`スプレッド構文`がどちらも同じ`...others`なのでわかりにくいですね。
 
-### 部品の子要素は、引数 `children` で取得できる (0c64645889631ce0ecd3cecbf264bcb7f3e75073)
+### 部品の子要素は、引数 `children` で取得できる ([0c64645](/kantas-spike/learn_react/commit/0c64645889631ce0ecd3cecbf264bcb7f3e75073))
 
 JSXで部品に子要素を表示させる場合、部品側では、`children`という属性として子要素を取得します。 [^17]
 
@@ -345,7 +345,7 @@ function Card({ children }) {
 }
 ~~~
 
-### サブプロジェクトもeslintできるようにvscodeを設定 (528e7fffdd2a64baa118bce4338703cb1be2be68)
+### サブプロジェクトもeslintできるようにvscodeを設定 ([528e7ff](/kantas-spike/learn_react/commit/528e7fffdd2a64baa118bce4338703cb1be2be68))
 
 本プロジェクトは`exercises`内に複数プロジェクトがあります。
 このような複数のサブプロジェクトがある場合、`eslint.workingDirectories`に対象プロジェクトを追加すると良いようです。 [^18]

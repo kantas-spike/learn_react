@@ -24,7 +24,9 @@ export default function Board() {
 
     const winner = calculateWinner(squares)
     let status
-    if (winner) {
+    if (winner === "draw") {
+        status = "this Game is a draw"
+    } else if (winner) {
         status = "Winner: " + winner
     } else {
         status = "Next player: " + (xIsNext ? "X" : "O")

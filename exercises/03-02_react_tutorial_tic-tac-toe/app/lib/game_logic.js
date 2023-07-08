@@ -17,5 +17,9 @@ export function calculateWinner(squares) {
         }
     }
 
+    if (squares.filter(value => value === null).length === 0) {
+        return "draw"
+    }
+
     return null
 }

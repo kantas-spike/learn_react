@@ -1,6 +1,7 @@
 'use client'
 
 import Board from "@/components/board"
+import Status from "@/components/status"
 import { useState } from "react"
 
 export default function Game() {
@@ -28,20 +29,23 @@ export default function Game() {
     }
     return (
         <li key={move}>
-            <button className="border rounded-sm py-1 px-2 my-2" onClick={() => jumpTo(move) }>{description}</button>
+            <button className="border rounded-sm py-1 px-2 mb-2" onClick={() => jumpTo(move) }>{description}</button>
         </li>
     )
   })
 
   return (
-    <div className="grid grid-cols-2 grid-rows-1 gap-4">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay}></Board>
-        <div>
-            <ol>
-                {moves}
-            </ol>
-        </div>
+    <div>
+        <Status xIsNext={xIsNext} squares={currentSquares} />
+        <div className="flex gap-4">
+            <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay}></Board>
+            <div>
+                <ol>
+                    {moves}
+                </ol>
+            </div>
 
+        </div>
     </div>
   )
 }

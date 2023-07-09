@@ -60,6 +60,12 @@ GitHub 上の会話の中では、Issue やプルリクエストへの参照は�
 Parsing error: Cannot find module 'next/babel'
 ~~~
 
+訂正： `vscode`の`eslint.workingDirectories`に`excercises/03-02_react_tutorial_tic-tac-toe`を設定し忘れていたことが原因のようです。
+そのため、`eslint.workingDirectories`を修正し、誤って修正した`.eslintrc.json`を元に戻しました。
+
+- 参考
+  - [next.js - Parsing error : Cannot find module 'next/babel' - Stack Overflow](https://stackoverflow.com/questions/68163385/parsing-error-cannot-find-module-next-babel/68838570#68838570)
+
 ### ReactとNext.jsの違い [7c8853d](https://github.com/kantas-spike/learn_react/commit/7c8853d7f895a006dbda30b140ce7d849b6bcde6)
 
 Reactでは、部品を表示するためには、

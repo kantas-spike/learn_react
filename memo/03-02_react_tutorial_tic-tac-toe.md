@@ -194,6 +194,7 @@ module.exports = nextConfig
 ~~~
 
 以下を実行すると、`out/`ディレクトリ内に、ルートごとにHTMLを生成し、静的サイトとして利用できるようになります。 [^2]
+
 ~~~shell
 npm run build
 ~~~
@@ -210,7 +211,7 @@ Serving HTTP on :: port 8000 (http://[::]:8000/) ...
 `out`ディレクトリを、そのままHugoの[Static Files](https://gohugo.io/content-management/static-files/)にコピーしたいのですが、
 `npm run build`で生成されたリソースのパスは全て`/`固定になっています。
 
-`next.config.js`に`basePath`を設定するとリソースのパスを変更できます。
+そこで、`next.config.js`に`basePath`を設定して、リソースのパスを変更しましょう。
 
 私のサイトは`/portfolio/`配下になるので、今回は`basePath`に`/portfolio/tictactoe`を設定することにします。
 

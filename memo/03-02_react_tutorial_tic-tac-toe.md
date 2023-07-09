@@ -180,4 +180,76 @@ Reactでは、情報を下位の部品に管理させるのではなく、親の
   - [Tutorial: Tic-Tac-Toe – Lifting state up| React](https://react.dev/learn/tutorial-tic-tac-toe#lifting-state-up)
   - [Tutorial: Tic-Tac-Toe - Lifting state up, again | React](https://react.dev/learn/tutorial-tic-tac-toe#lifting-state-up-again)
 
+### Static Export した Tic-Tac-Toeを Hugoで公開したい
+
+`next.config.js`に`output: 'export'`を追加し、
+
+~~~js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+    output: 'export'
+}
+
+module.exports = nextConfig
+~~~
+
+以下を実行すると、`out/`ディレクトリ内に、ルートごとにHTMLを生成し、静的サイトとして利用できるようになります。 [^2]
+~~~shell
+npm run build
+~~~
+
+試しに、以下のように`python`で`out/`をドキュメントディレクトリに指定して、簡易的なHTTPサーバーを立ち上げて動作確認してみましょう。
+
+`http://localhost:8000/`にアクセスすると三目並べが表示されるはずです。
+
+~~~shell
+$ python3 -m http -d out/ 8000
+Serving HTTP on :: port 8000 (http://[::]:8000/) ...
+~~~
+
+`out`ディレクトリを、そのままHugoの[Static Files](https://gohugo.io/content-management/static-files/)にコピーしたいのですが、
+`npm run build`で生成されたリソースのパスは全て`/`固定になっています。
+
+`next.config.js`に`basePath`を設定するとリソースのパスを変更できます。
+
+私のサイトは`/portfolio/`配下になるので、今回は`basePath`に`/portfolio/tictactoe`を設定することにします。
+
+~~~js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+    output: 'export',
+    basePath: '/portfolio/tictactoe',
+}
+
+module.exports = nextConfig
+~~~
+
+あとは、以下のように`out`ディレクトリを、Hugoのサイトの`static/tictactoe`という名前でコピーしてやれば良さそうです。
+
+私のサイトは`~/blog`で管理していますので、コピー方法は以下になります。
+
+~~~shell
+cp -r out ~/blog/static/tictactoe
+~~~
+
+あとは、`~/blog`に移動し、Hugoを起動して確認してみましょう。
+
+~~~shell
+$ cd ~/blog
+$ hogo server
+Web Server is available at http://localhost:1313/portfolio/ (bind address 127.0.0.1)
+Press Ctrl+C to stop
+~~~
+
+ブラウザで`http://localhost:1313/portfolio/tictactoe/`にアクセスすると三目並べが表示されるはずです。
+
+Runtimeサーバーを利用しないためいくつか制限はありますが、この方法でNext.jsで作成したアプリケーションをHogoのサイトに公開したいと思います。 [^3]
+
+- 参考
+  - [Deploying: Static Exports | Next.js](https://nextjs.org/docs/app/building-your-application/deploying/static-exports)
+  - [next.config.js Options: basePath | Next.js](https://nextjs.org/docs/app/api-reference/next-config-js/basePath)
+  - [Deploying: Static Exports - Unsupported Features | Next.js](https://nextjs.org/docs/app/building-your-application/deploying/static-exports#unsupported-features)
+
 [^1]: デフォルトの`"@/*": ["./*"]`で良い気がします。部品のインポートを`@/app/components/button.js`と`@/components/button.js`のどちらでするかだけの話
+[^2]: JavaScriptを実行するRuntimeサーバーは不要になります。
+[^3]: Hugoで利用する場合はNext.jsの`server functions`が使えないので歪なアプリになりそうですが...

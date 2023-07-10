@@ -60,7 +60,7 @@ GitHub 上の会話の中では、Issue やプルリクエストへの参照は�
 Parsing error: Cannot find module 'next/babel'
 ~~~
 
-訂正： `vscode`の`eslint.workingDirectories`に`excercises/03-02_react_tutorial_tic-tac-toe`を設定し忘れていたことが原因のようです。
+訂正： `vscode`の`eslint.workingDirectories`に`exercises/03-02_react_tutorial_tic-tac-toe`を設定し忘れていたことが原因のようです。
 そのため、`eslint.workingDirectories`を修正し、誤って修正した`.eslintrc.json`を元に戻しました。
 
 - 参考

@@ -4,6 +4,7 @@
         "./exercises/02_devenv-validation",
         "./exercises/03-01_react_quick_start",
         "./exercises/03-02_react_tutorial_tic-tac-toe",
+        "./exercises/03-03_react_thinking-in-react"
     ],
     "js/ts.implicitProjectConfig.checkJs": true,
 }

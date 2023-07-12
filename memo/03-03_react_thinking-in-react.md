@@ -218,9 +218,26 @@ for (const [category] of Object.entries(grouped_products)) {
 - 参考
   - [Rendering Lists – Rules of keys | React](https://react.dev/learn/rendering-lists#rules-of-keys)
 
-## 参考
+### `<input>`の`value`属性だけ設定してもエラーが表示される ([c91a20b](https://github.com/kantas-spike/learn_react/commit/c91a20b53706e22b1557a489a3556e38614aabfb))
 
-- [DOM Elements – React](https://legacy.reactjs.org/docs/dom-elements.html#htmlfor)
-- [Element.scrollHeight - Web API | MDN](https://developer.mozilla.org/ja/docs/Web/API/Element/scrollHeight)
-- [How to adjust the width and height of an iframe to fit with content in it](https://www.tutorialspoint.com/how-to-adjust-the-width-and-height-of-an-iframe-to-fit-with-content-in-it-html)
-- [<input> – React](https://react.dev/reference/react-dom/components/input#my-text-input-doesnt-update-when-i-type-into-it)
+以下のように設定した場合、
+
+~~~js
+<input value={something} />
+~~~
+
+コンソールに以下のエラーが表示されます。
+
+~~~shell
+You provided a value prop to a form field without an onChange handler. This will render a read-only field.
+If the field should be mutable use defaultValue. Otherwise, set either onChange or readOnly.
+~~~
+
+正しくは、以下のように`onChange`ハンドラも合せて設定する必要があります。
+
+~~~js
+<input value={something} onChange={e => setSomething(e.target.value)} />
+~~~
+
+- 参考
+  - [<input> – React](https://react.dev/reference/react-dom/components/input#my-text-input-doesnt-update-when-i-type-into-it)

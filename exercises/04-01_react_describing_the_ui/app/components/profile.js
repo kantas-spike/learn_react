@@ -1,6 +1,10 @@
+import Avatar from "./avatar";
+import Card from "./card";
 
-export default function Profile() {
+export default function Profile({person, size=100}) {
     return (
-        <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" className="inline-block mr-4" />
+        <Card>
+            <Avatar size={size} person={person}></Avatar>
+        </Card>
      )
 }

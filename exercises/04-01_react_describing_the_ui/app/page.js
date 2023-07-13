@@ -8,6 +8,7 @@ export default function Home() {
       <li><MyLink href="/todolist">TODO List</MyLink></li>
       <li><MyLink href="/profile">Profile</MyLink></li>
       <li><MyLink href="/list">List</MyLink></li>
+      <li><MyLink href="/teaset">TeaSet</MyLink></li>
     </ul>
   )
 }

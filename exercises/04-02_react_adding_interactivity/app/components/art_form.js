@@ -1,44 +1,31 @@
 'use client'
 
-import { useState } from "react"
+import { useImmer } from "use-immer"
 
 export default function ArtForm({art}){
-    const [person, setPerson] = useState(art)
+    const [person, updatePerson] = useImmer(art)
 
     function handleNameChange(e) {
-        setPerson({
-            ...person,
-            name: e.target.value
+        updatePerson(draft => {
+            draft.name = e.target.value
         })
     }
 
     function handleTitleChange(e) {
-        setPerson({
-            ...person,
-            artwork: {
-                ...person.artwork,
-                title: e.target.value
-            }
+        updatePerson(draft => {
+            draft.artwork.title = e.target.value
         })
     }
 
     function handleCityChange(e) {
-        setPerson({
-            ...person,
-            artwork: {
-                ...person.artwork,
-                city: e.target.value
-            }
+        updatePerson(draft => {
+            draft.artwork.city = e.target.value
         })
     }
 
     function handleImageChange(e) {
-        setPerson({
-            ...person,
-            artwork: {
-                ...person.artwork,
-                image: e.target.value
-            }
+        updatePerson(draft => {
+            draft.artwork.image = e.target.value
         })
     }
 

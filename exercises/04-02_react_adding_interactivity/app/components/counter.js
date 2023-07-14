@@ -6,7 +6,7 @@ export default function Counter(){
     const [score, setScore] = useState(0)
 
     function increment() {
-        setScore(score + 1)
+        setScore(s => s + 1)
     }
 
     return (

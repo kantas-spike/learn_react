@@ -4,7 +4,10 @@ import MyLink from './components/link'
 export default function Home() {
   return (
     <div>
-      <MyLink href="/toolbar">Toolbar</MyLink>
+      <ul>
+        <li><MyLink href="/toolbar">Toolbar</MyLink></li>
+        <li><MyLink href="/gallery">Gallery</MyLink></li>
+      </ul>
     </div>
   )
 }

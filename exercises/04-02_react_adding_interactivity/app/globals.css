@@ -15,3 +15,7 @@ button {
 body {
   color: rgb(var(--foreground-rgb));
 }
+
+input, textarea, select {
+  @apply border px-1
+}

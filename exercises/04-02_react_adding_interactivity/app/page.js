@@ -9,6 +9,7 @@ export default function Home() {
         <li><MyLink href="/gallery">Gallery</MyLink></li>
         <li><MyLink href="/form">Form</MyLink></li>
         <li><MyLink href="/counter">Counter</MyLink></li>
+        <li><MyLink href="/art_form">Art Form</MyLink></li>
       </ul>
     </div>
   )

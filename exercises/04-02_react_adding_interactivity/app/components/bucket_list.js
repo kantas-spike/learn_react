@@ -1,18 +1,15 @@
 'use client'
 
-import { useState } from "react"
+import { useImmer } from "use-immer"
 
 export default function BucketList({artList}){
-    const [list, setList] = useState(artList)
+    const [list, updateList] = useImmer(artList)
 
     function handleToggle(artworkId, nextSeen)  {
-        setList(list.map(artwork => {
-            if (artwork.id === artworkId) {
-                return { ...artwork, seen: nextSeen }
-            } else {
-                return artwork
-            }
-        }))
+        updateList(draft => {
+            const artwork = draft.find(a => a.id === artworkId)
+            artwork.seen = nextSeen
+        })
     }
 
     return (

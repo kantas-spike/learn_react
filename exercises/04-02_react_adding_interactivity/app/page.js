@@ -8,6 +8,7 @@ export default function Home() {
         <li><MyLink href="/toolbar">Toolbar</MyLink></li>
         <li><MyLink href="/gallery">Gallery</MyLink></li>
         <li><MyLink href="/form">Form</MyLink></li>
+        <li><MyLink href="/counter">Counter</MyLink></li>
       </ul>
     </div>
   )

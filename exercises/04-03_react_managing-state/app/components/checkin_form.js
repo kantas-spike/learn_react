@@ -5,16 +5,14 @@ import { useState } from "react"
 export default function CheckInForm(){
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
-    const [fullName, setFullName] = useState('')
+    const fullName = firstName + ' ' + lastName
 
     function handleFirstName(e) {
         setFirstName(e.target.value)
-        setFullName(e.target.value + ' ' + lastName)
     }
 
     function handleLastName(e) {
         setLastName(e.target.value)
-        setFullName(firstName + ' ' + e.target.value)
     }
 
     return (

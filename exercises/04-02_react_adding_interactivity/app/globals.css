@@ -16,6 +16,10 @@ body {
   color: rgb(var(--foreground-rgb));
 }
 
+a {
+  @apply underline underline-offset-4 text-blue-600;
+}
+
 input, textarea, select {
   @apply border px-1
 }

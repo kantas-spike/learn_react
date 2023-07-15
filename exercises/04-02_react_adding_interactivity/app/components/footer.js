@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from "next/navigation"
-import MyLink from "@/components/link"
+import Link from "next/link";
 
 export default function MyFooter() {
     const pathName = usePathname()
@@ -9,7 +9,7 @@ export default function MyFooter() {
     if (pathName !== "/") {
         content = (<div>
             <hr className="my-4"/>
-            <MyLink href="/">Homeへ戻る</MyLink>
+            <Link href="/">Homeへ戻る</Link>
         </div>)
     }
     return (content)

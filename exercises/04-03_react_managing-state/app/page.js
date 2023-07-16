@@ -9,6 +9,7 @@ export default function Home() {
           <li><Link href="/quiz_form">Quiz Form</Link></li>
           <li><Link href="/checkin_form">Check in Form</Link></li>
           <li><Link href="/accordion">Accordion</Link></li>
+          <li><Link href="/messenger">Messenger</Link></li>
         </ul>
       </div>
     </main>

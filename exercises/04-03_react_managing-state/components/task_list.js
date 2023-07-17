@@ -1,13 +1,15 @@
 import { useState } from "react"
+import { useTasks, useTasksDispatch } from "./task_context"
 
-export default function TaskList({tasks, onChangeTask, onDeleteTask}){
+export default function TaskList(){
+    const tasks = useTasks()
     return (
         <section>
             <ul>
                 {
                     tasks.map(task => (
                         <li key={task.id}>
-                            <Task task={task} onChange={onChangeTask} onDelete={onDeleteTask} />
+                            <Task task={task} />
                         </li>
                     ))
                 }
@@ -16,8 +18,24 @@ export default function TaskList({tasks, onChangeTask, onDeleteTask}){
     )
 }
 
-function Task({task, onChange, onDelete}) {
+function Task({task}) {
     const [isEditing, setIsEditing] = useState(false)
+    const dispatch = useTasksDispatch()
+
+    function handleChangeTask(task) {
+        dispatch({
+            type: 'changed',
+            task: task
+        })
+    }
+
+    function handleDeleteTask(taskId) {
+        dispatch({
+            type: 'deleted',
+            id: taskId
+        })
+    }
+
     let taskContent
     if (isEditing) {
         taskContent = (
@@ -25,7 +43,7 @@ function Task({task, onChange, onDelete}) {
             <input type="text" className="mr-2"
                 value={task.text}
                 onChange={(e) => {
-                    onChange({
+                    handleChangeTask({
                         ...task,
                         text: e.target.value,
                     })
@@ -48,7 +66,7 @@ function Task({task, onChange, onDelete}) {
             <input type="checkbox" name={`t_${task.id}`} id={`t_${task.id}`} className="mr-1"
                 checked={task.done}
                 onChange={(e) => {
-                    onChange({
+                    handleChangeTask({
                         ...task,
                         done: e.target.checked
                     })
@@ -56,7 +74,7 @@ function Task({task, onChange, onDelete}) {
              />
             {taskContent}
         </label>
-        <button onClick={() => onDelete(task.id)}>Delete</button>
+        <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
         </>
     )
 }

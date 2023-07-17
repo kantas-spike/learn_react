@@ -11,6 +11,7 @@ export default function Home() {
           <li><Link href="/accordion">Accordion</Link></li>
           <li><Link href="/messenger">Messenger</Link></li>
           <li><Link href="/tasks">Tasks</Link></li>
+          <li><Link href="/page">Page</Link></li>
         </ul>
       </div>
     </main>

@@ -7,6 +7,7 @@ export default function Home() {
         <li><Link href="/counter">Counter</Link></li>
         <li><Link href="/form">Form</Link></li>
         <li><Link href="/video">Video</Link></li>
+        <li><Link href="/chatroom">ChatRoom</Link></li>
       </ul>
     </main>
   )

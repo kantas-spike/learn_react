@@ -1,6 +1,5 @@
 'use client'
 
-import { useReducer } from "react";
 import AddTask from "./add_task";
 import TaskList from "./task_list";
 import TasksProvider from "./task_context";

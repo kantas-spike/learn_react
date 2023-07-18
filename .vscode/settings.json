@@ -7,6 +7,7 @@
         "./exercises/03-03_react_thinking-in-react",
         "./exercises/04-01_react_describing_the_ui",
         "./exercises/04-02_react_adding_interactivity",
+        "./exercises/04-03_react_managing-state",
     ],
     "js/ts.implicitProjectConfig.checkJs": true,
 }

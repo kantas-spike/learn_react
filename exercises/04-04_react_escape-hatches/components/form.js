@@ -7,10 +7,7 @@ export default function From(){
     const [lastName, setLastName] = useState('Swift')
     const inputRef = useRef(null)
 
-    const [fullName, setFullName] = useState('')
-    useEffect(() => {
-        setFullName(firstName + ' ' + lastName)
-    }, [firstName, lastName])
+    const fullName = firstName + ' ' + lastName
 
     function handleClick() {
         inputRef.current.focus()

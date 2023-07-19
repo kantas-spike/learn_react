@@ -8,6 +8,7 @@ export default function Home() {
         <li><Link href="/form">Form</Link></li>
         <li><Link href="/video">Video</Link></li>
         <li><Link href="/chatroom">ChatRoom</Link></li>
+        <li><Link href="/canvas">Canvas</Link></li>
       </ul>
     </main>
   )

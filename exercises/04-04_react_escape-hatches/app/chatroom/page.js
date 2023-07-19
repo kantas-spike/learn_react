@@ -1,15 +1,22 @@
 'use client'
 
-import createConnection from "@/components/chat"
-import { useEffect } from "react"
+import ChatRoom from "@/components/chatroom"
+import { useState } from "react"
 
 export default function ChatRoomPage(){
-    useEffect(() => {
-        const connection = createConnection()
-        connection.connect()
-        return () => connection.disconnect()
-    }, [])
+    const [roomId, setRoomId] = useState('general')
     return (<main>
-        <h1>Welcom to the chat!</h1>
+        <label>
+            choose the chat room: {' '}
+            <select
+                value={roomId}
+                onChange={e => setRoomId(e.target.value)}>
+                    <option value="general">general</option>
+                    <option value="travel">travel</option>
+                    <option value="music">music</option>
+            </select>
+        </label>
+        <hr className="m-4"/>
+        <ChatRoom roomId={roomId}></ChatRoom>
     </main>)
 }

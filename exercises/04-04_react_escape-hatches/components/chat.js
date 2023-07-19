@@ -1,4 +1,4 @@
-export default function createConnection(serverUrl, roomId){
+export default function createConnection({serverUrl, roomId}){
     let connectedCallback
     let timeout
     return {

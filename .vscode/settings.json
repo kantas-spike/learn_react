@@ -8,6 +8,7 @@
         "./exercises/04-01_react_describing_the_ui",
         "./exercises/04-02_react_adding_interactivity",
         "./exercises/04-03_react_managing-state",
+        "./exercises/04-04_react_escape-hatches",
     ],
     "js/ts.implicitProjectConfig.checkJs": true,
 }
